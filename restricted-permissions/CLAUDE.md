@@ -6,3 +6,12 @@
 - Don't pipe to `head`, `tail`, `sort`, or `wc`; read the output, or use Read with offset/limit.
 - Allowed without prompting: git status/diff/log/show/branch/add/commit/stash/restore/checkout, npm run/test, npx eslint/prettier/tsc, pytest, rg, fd, jq, make. Shape commands to start with one of these.
 - Use the Explore subagent for broad codebase searches. Other subagent types are not available here.
+
+## Multi-repo workspaces
+
+Sessions often start in a workspace folder that holds several git repos side by side. Allow rules match the start of a command, so:
+
+- Never use `git -C <path>` or tool flags that point at another directory. They don't match the allow rules.
+- To work in a repo, first run `cd "<full path to repo>"` as its own command, then run plain commands (`git status`, `npm run build`). The shell stays in that directory for later commands.
+- When switching to another repo, `cd` to it first the same way.
+- File tools (Read, Edit, Grep, Glob) take full paths and work across all repos without changing directory.
