@@ -12,6 +12,7 @@
 Sessions often start in a workspace folder that holds several git repos side by side. Allow rules match the start of a command, so:
 
 - Never use `git -C <path>` or tool flags that point at another directory. They don't match the allow rules.
-- To work in a repo, first run `cd "<full path to repo>"` as its own command, then run plain commands (`git status`, `npm run build`). The shell stays in that directory for later commands.
+- To work in a repo, first run `cd "<full path to repo>"` as its own Bash call, then run plain commands (`git status`, `npm run build`) in separate calls. The shell stays in that directory for later commands.
+- Never combine `cd` with anything else (`cd X && git ...`). Claude Code always asks before a command that changes directory and then runs git, as a safety check.
 - When switching to another repo, `cd` to it first the same way.
 - File tools (Read, Edit, Grep, Glob) take full paths and work across all repos without changing directory.
