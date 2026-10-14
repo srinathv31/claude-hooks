@@ -1,0 +1,3 @@
+# Never commit local permission logs
+*.jsonl
+node_modules/
